@@ -62,7 +62,7 @@ public abstract class RepositoryValueSource<V, P extends RepositoryValueSource.P
   @Override
   public final @Nullable V obtain() {
     final Parameters params = this.getParameters();
-    final Git git = GitCache.get(params.getRootDir().get().getAsFile()).git(params.getProjectDir().get().getAsFile(), params.getDisplayName().get());
+    final Git git = GitCache.getOrCreate(params.getRootDir().get().getAsFile()).git(params.getProjectDir().get().getAsFile(), params.getDisplayName().get());
     if (git == null) return null;
 
     return this.obtain(git);
